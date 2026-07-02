@@ -71,3 +71,79 @@ form.addEventListener('submit', async function (e) {
     alert('Нет соединения. Проверьте интернет и попробуйте снова.');
   }
 });
+
+/* ── Карта: активация по клику (не перехватывает скролл) ─── */
+const mapOverlay = document.getElementById('map-overlay');
+if (mapOverlay) {
+  mapOverlay.addEventListener('click', function () {
+    mapOverlay.classList.add('is-hidden');
+  });
+}
+
+/* ── Лайтбокс: увеличение фото по клику ──────────────────── */
+(function () {
+  const photos = Array.from(document.querySelectorAll('.photo-main, .gallery-photo'));
+  if (photos.length === 0) return;
+
+  const lightbox    = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const btnClose    = document.getElementById('lightbox-close');
+  const btnPrev     = document.getElementById('lightbox-prev');
+  const btnNext     = document.getElementById('lightbox-next');
+
+  let currentIndex = 0;
+
+  function show(index) {
+    currentIndex = index;
+    lightboxImg.src = photos[currentIndex].src;
+    lightboxImg.alt = photos[currentIndex].alt;
+  }
+
+  function open(index) {
+    show(index);
+    lightbox.hidden = false;
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    lightbox.hidden = true;
+    document.body.style.overflow = '';
+  }
+
+  function next() { show((currentIndex + 1) % photos.length); }
+  function prev() { show((currentIndex - 1 + photos.length) % photos.length); }
+
+  photos.forEach((photo, index) => {
+    photo.addEventListener('click', () => open(index));
+  });
+
+  btnClose.addEventListener('click', close);
+  btnNext.addEventListener('click', next);
+  btnPrev.addEventListener('click', prev);
+
+  // Клик по затемнённому фону закрывает лайтбокс
+  lightbox.addEventListener('click', function (e) {
+    if (e.target === lightbox) close();
+  });
+
+  // Клавиатура: Esc закрывает, стрелки листают
+  document.addEventListener('keydown', function (e) {
+    if (lightbox.hidden) return;
+    if (e.key === 'Escape')    close();
+    if (e.key === 'ArrowRight') next();
+    if (e.key === 'ArrowLeft')  prev();
+  });
+
+  // Свайп на мобильном
+  let touchStartX = 0;
+  lightbox.addEventListener('touchstart', function (e) {
+    touchStartX = e.changedTouches[0].clientX;
+  }, { passive: true });
+
+  lightbox.addEventListener('touchend', function (e) {
+    const diff = e.changedTouches[0].clientX - touchStartX;
+    const SWIPE_THRESHOLD = 40;
+    if (diff > SWIPE_THRESHOLD)  prev();
+    if (diff < -SWIPE_THRESHOLD) next();
+  }, { passive: true });
+})();

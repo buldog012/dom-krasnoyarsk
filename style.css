@@ -246,6 +246,7 @@ section { padding: var(--py) 0; }
   object-fit: cover;
   border-radius: var(--r);
   box-shadow: var(--sh-md);
+  cursor: zoom-in;
 }
 
 .house-params {
@@ -273,6 +274,9 @@ section { padding: var(--py) 0; }
   color: var(--c-dark);
   line-height: 1.15;
 }
+
+.param-item--wide { grid-column: 1 / -1; }
+.param-item--wide dd { font-size: .92rem; font-weight: 700; line-height: 1.4; }
 
 .house-plan {
   font-size: .9rem;
@@ -309,6 +313,7 @@ section { padding: var(--py) 0; }
   height: 100%;
   object-fit: cover;
   display: block;
+  cursor: zoom-in;
   transition: transform .32s ease;
 }
 .gallery-item:hover .gallery-photo { transform: scale(1.07); }
@@ -430,6 +435,52 @@ section { padding: var(--py) 0; }
 .reason p  { color: rgba(255,255,255,.66); font-size: .95rem; line-height: 1.65; }
 
 /* =============================================
+   Как добраться
+============================================= */
+.route { background: var(--c-bg); }
+
+.route-address {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--c-dark);
+  margin-bottom: 6px;
+}
+
+.map-embed {
+  position: relative;
+  border-radius: var(--r);
+  overflow: hidden;
+  box-shadow: var(--sh);
+  margin-bottom: 20px;
+}
+.map-embed iframe {
+  display: block;
+  width: 100%;
+  height: 380px;
+  border: 0;
+}
+
+.map-overlay {
+  display: none;
+  position: absolute;
+  inset: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(24,28,40,.4);
+  color: #fff;
+  font-family: inherit;
+  font-size: .92rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+}
+.map-overlay.is-hidden { display: none; }
+
+.route-link { display: inline-flex; }
+
+/* =============================================
    Форма
 ============================================= */
 .form-section { background: var(--c-bg-alt); }
@@ -543,8 +594,9 @@ section { padding: var(--py) 0; }
   margin-bottom: 24px;
   flex-wrap: wrap;
 }
-.footer-brand { font-size: .98rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
-.footer-city  { font-size: .85rem; color: rgba(255,255,255,.45); }
+.footer-brand   { font-size: .98rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
+.footer-city    { font-size: .85rem; color: rgba(255,255,255,.45); }
+.footer-address { font-size: .85rem; color: rgba(255,255,255,.45); margin-top: 2px; }
 
 .footer-contacts { display: flex; gap: 20px; flex-wrap: wrap; }
 .footer-contacts a {
@@ -614,6 +666,65 @@ section { padding: var(--py) 0; }
 .mobile-bar__btn--tg::before {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z'/%3E%3C/svg%3E");
 }
+
+/* =============================================
+   Лайтбокс (увеличение фото)
+============================================= */
+.lightbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: rgba(15, 17, 23, .93);
+  touch-action: pan-y;
+}
+.lightbox[hidden] { display: none; }
+
+.lightbox__img {
+  max-width: 88vw;
+  max-height: 82vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--r-sm);
+  box-shadow: 0 12px 60px rgba(0,0,0,.5);
+}
+
+.lightbox__close,
+.lightbox__arrow {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,.1);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background .17s;
+}
+.lightbox__close:hover,
+.lightbox__arrow:hover { background: rgba(255,255,255,.2); }
+
+.lightbox__close {
+  top: 20px;
+  right: 20px;
+  width: 46px;
+  height: 46px;
+}
+.lightbox__close svg { width: 22px; height: 22px; }
+
+.lightbox__arrow {
+  top: 50%;
+  transform: translateY(-50%);
+  width: 52px;
+  height: 52px;
+}
+.lightbox__arrow svg { width: 24px; height: 24px; }
+.lightbox__arrow--prev { left: 16px; }
+.lightbox__arrow--next { right: 16px; }
 
 /* =============================================
    Privacy page
@@ -717,4 +828,25 @@ section { padding: var(--py) 0; }
   .contact-buttons .btn { width: 100%; }
 
   .footer-contacts { flex-direction: column; gap: 10px; }
+
+  /* Карта — оверлей перехватывает тач, чтобы не блокировать скролл страницы */
+  .map-overlay { display: flex; }
+  .map-embed iframe { height: 280px; }
+  .route-address { font-size: 1.1rem; }
+
+  /* Лайтбокс на мобильном — крупный крестик, компактные стрелки, свайп основной */
+  .lightbox__img { max-width: 94vw; max-height: 76vh; }
+
+  .lightbox__close {
+    top: 12px;
+    right: 12px;
+    width: 52px;
+    height: 52px;
+    background: rgba(255,255,255,.14);
+  }
+  .lightbox__close svg { width: 26px; height: 26px; }
+
+  .lightbox__arrow { width: 44px; height: 44px; }
+  .lightbox__arrow--prev { left: 8px; }
+  .lightbox__arrow--next { right: 8px; }
 }

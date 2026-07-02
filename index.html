@@ -80,9 +80,9 @@
               <dt>Терраса</dt>
               <dd>20 м², крытая</dd>
             </div>
-            <div class="param-item">
+            <div class="param-item param-item--wide">
               <dt>Расположение</dt>
-              <dd>Красноярск</dd>
+              <dd>с. Зыково, ул. Свободы, 43 — рядом с Красноярском</dd>
             </div>
           </dl>
 
@@ -233,6 +233,39 @@
   </section>
 
 
+  <!-- ========== СЕКЦИЯ: КАК ДОБРАТЬСЯ ========== -->
+  <section class="route" id="route">
+    <div class="container">
+      <p class="section-label">Как добраться</p>
+      <h2>Приезжайте посмотреть дом</h2>
+      <p class="route-address">с.&nbsp;Зыково, ул.&nbsp;Свободы, 43</p>
+      <p class="section-desc">Берёзовский район, рядом с Красноярском.</p>
+
+      <div class="map-embed" id="map-embed">
+        <iframe
+          src="https://yandex.ru/map-widget/v1/?ll=93.128498%2C55.947348&z=17&pt=93.128498%2C55.947348%2Cpm2rdm"
+          width="100%"
+          height="380"
+          frameborder="0"
+          loading="lazy"
+          title="Карта проезда: с. Зыково, ул. Свободы, 43"
+        ></iframe>
+        <button class="map-overlay" id="map-overlay" type="button" aria-label="Включить взаимодействие с картой">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11a3 3 0 106 0 3 3 0 00-6 0z"/><path d="M12 2C7.58 2 4 5.58 4 10c0 5.25 7 12 8 12s8-6.75 8-12c0-4.42-3.58-8-8-8z"/></svg>
+          <span>Нажмите, чтобы открыть карту</span>
+        </button>
+      </div>
+
+      <a
+        class="btn btn-outline route-link"
+        href="https://yandex.ru/maps/?rtext=~55.947348%2C93.128498&rtt=auto"
+        target="_blank"
+        rel="noopener noreferrer"
+      >Построить маршрут</a>
+    </div>
+  </section>
+
+
   <!-- ========== СЕКЦИЯ 6: ФОРМА ЗАЯВКИ ========== -->
   <section class="form-section" id="form">
     <div class="container">
@@ -318,6 +351,7 @@
         <div class="footer-info">
           <p class="footer-brand">Строим дома в Красноярске</p>
           <p class="footer-city">Красноярск и пригород</p>
+          <p class="footer-address">Дом на просмотр: с. Зыково, ул. Свободы, 43</p>
         </div>
 
         <div class="footer-contacts">
@@ -339,6 +373,20 @@
     <a href="tel:+79131841001" class="mobile-bar__btn mobile-bar__btn--call">Позвонить</a>
     <a href="https://wa.me/79131841001" class="mobile-bar__btn mobile-bar__btn--wa" target="_blank" rel="noopener noreferrer">WhatsApp</a>
     <a href="https://t.me/buldog012" class="mobile-bar__btn mobile-bar__btn--tg" target="_blank" rel="noopener noreferrer">Telegram</a>
+  </div>
+
+  <!-- Лайтбокс — увеличение фото по клику -->
+  <div class="lightbox" id="lightbox" hidden>
+    <button class="lightbox__close" id="lightbox-close" aria-label="Закрыть">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <button class="lightbox__arrow lightbox__arrow--prev" id="lightbox-prev" aria-label="Предыдущее фото">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+    </button>
+    <img class="lightbox__img" id="lightbox-img" src="" alt="">
+    <button class="lightbox__arrow lightbox__arrow--next" id="lightbox-next" aria-label="Следующее фото">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+    </button>
   </div>
 
   <script src="script.js"></script>
