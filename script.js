@@ -96,6 +96,52 @@ if (videoEmbed && videoPlayBtn) {
   });
 }
 
+/* ── Шапка: тень появляется только после начала скролла ──── */
+(function () {
+  const header = document.querySelector('.site-header');
+  if (!header) return;
+
+  function onScroll() {
+    header.classList.toggle('is-scrolled', window.scrollY > 8);
+  }
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+})();
+
+/* ── Scroll-reveal: блоки плавно появляются при прокрутке ── */
+(function () {
+  const targets = document.querySelectorAll(
+    '.house-layout, .house-gallery, .video-block, .included-col, .type-card, .reason, .map-embed, .lead-form, .stat-bar__inner'
+  );
+  if (!targets.length) return;
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion) return;
+
+  targets.forEach((el) => el.classList.add('reveal'));
+
+  // Лёгкий каскад для карточек внутри одной сетки
+  ['.types-grid', '.reasons-grid', '.included-grid'].forEach((sel) => {
+    document.querySelectorAll(`${sel} > *`).forEach((el, i) => {
+      el.style.transitionDelay = `${i * 90}ms`;
+    });
+  });
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15, rootMargin: '0px 0px -60px 0px' }
+  );
+
+  targets.forEach((el) => observer.observe(el));
+})();
+
 /* ── Карта: активация по клику (не перехватывает скролл) ─── */
 const mapOverlay = document.getElementById('map-overlay');
 if (mapOverlay) {

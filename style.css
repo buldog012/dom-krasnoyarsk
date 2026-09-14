@@ -168,8 +168,13 @@ section { padding: var(--py) 0; }
   background: rgba(255,255,255,.96);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--c-border);
+  border-bottom: 1px solid transparent;
   padding: 12px 0;
+  transition: box-shadow .25s ease, border-color .25s ease;
+}
+.site-header.is-scrolled {
+  border-bottom-color: var(--c-border);
+  box-shadow: 0 2px 16px rgba(0,0,0,.06);
 }
 .header-inner {
   display: flex;
@@ -190,15 +195,48 @@ section { padding: var(--py) 0; }
    Hero
 ============================================= */
 .hero {
-  background:
-    linear-gradient(170deg, rgba(20,25,40,.70) 0%, rgba(20,25,40,.50) 100%),
-    url('photos/main.jpg') center 40% / cover no-repeat;
+  position: relative;
+  overflow: hidden;
   min-height: 88vh;
   display: flex;
   align-items: center;
   padding: 120px 0 100px;
 }
-.hero-content { max-width: 640px; }
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('photos/main.jpg') center 40% / cover no-repeat;
+  animation: heroZoom 26s ease-in-out infinite alternate;
+  z-index: 0;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(170deg, rgba(20,25,40,.70) 0%, rgba(20,25,40,.50) 100%);
+  z-index: 1;
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 640px;
+  opacity: 0;
+  transform: translateY(18px);
+  animation: heroFadeUp .8s ease .1s forwards;
+}
+
+@keyframes heroZoom {
+  from { transform: scale(1); }
+  to   { transform: scale(1.09); }
+}
+@keyframes heroFadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero::before { animation: none; }
+  .hero-content { animation: none; opacity: 1; transform: none; }
+}
 
 .hero-location {
   display: inline-block;
@@ -227,6 +265,46 @@ section { padding: var(--py) 0; }
   margin-bottom: 36px;
   max-width: 520px;
 }
+
+/* =============================================
+   Полоса с ключевыми цифрами (наплывает на hero)
+============================================= */
+.stat-bar {
+  position: relative;
+  z-index: 5;
+  margin-top: -44px;
+}
+.stat-bar__inner {
+  background: var(--c-bg);
+  border-radius: var(--r);
+  box-shadow: var(--sh-md);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  overflow: hidden;
+}
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 22px 12px;
+  text-align: center;
+  border-right: 1px solid var(--c-border);
+}
+.stat-item:last-child { border-right: none; }
+.stat-value {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--c-dark);
+  line-height: 1.1;
+}
+.stat-key {
+  font-size: .72rem;
+  color: var(--c-muted);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+.stat-item--price .stat-value { color: var(--c-accent); }
 
 /* =============================================
    Готовый дом
@@ -259,6 +337,11 @@ section { padding: var(--py) 0; }
   background: var(--c-bg-alt);
   border-radius: var(--r-sm);
   padding: 14px 16px;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.param-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--sh-sm);
 }
 .param-item dt {
   font-size: .72rem;
@@ -404,6 +487,11 @@ section { padding: var(--py) 0; }
   border-radius: var(--r);
   padding: 32px;
   border-top: 4px solid var(--c-border);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.included-col:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--sh);
 }
 .included-done { border-top-color: var(--c-green); }
 
@@ -502,6 +590,8 @@ section { padding: var(--py) 0; }
   color: rgba(255,255,255,.18);
   margin-bottom: 10px;
 }
+.reason { transition: transform .2s ease; }
+.reason:hover { transform: translateY(-2px); }
 .reason h3 { color: #fff; margin-bottom: 8px; }
 .reason p  { color: rgba(255,255,255,.66); font-size: .95rem; line-height: 1.65; }
 
@@ -843,6 +933,19 @@ section { padding: var(--py) 0; }
 .privacy-section a { color: var(--c-dark); text-decoration: underline; }
 
 /* =============================================
+   Scroll-reveal (появление блоков при скролле)
+============================================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =============================================
    Адаптив — планшет (900px)
 ============================================= */
 @media (max-width: 900px) {
@@ -872,6 +975,16 @@ section { padding: var(--py) 0; }
 ============================================= */
 @media (max-width: 600px) {
   :root { --py: 52px; }
+
+  .stat-bar { margin-top: -28px; }
+  .stat-bar__inner { grid-template-columns: repeat(2, 1fr); }
+  .stat-item {
+    padding: 16px 8px;
+    border-bottom: 1px solid var(--c-border);
+  }
+  .stat-item:nth-child(2n) { border-right: none; }
+  .stat-item:nth-last-child(-n+2) { border-bottom: none; }
+  .stat-value { font-size: 1.1rem; }
 
   /* Прячем кнопки в шапке — они в sticky bar */
   .header-contacts { display: none; }
