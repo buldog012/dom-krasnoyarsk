@@ -72,6 +72,30 @@ form.addEventListener('submit', async function (e) {
   }
 });
 
+/* ── Видео: iframe создаётся только по клику, без автозапуска
+   на загрузке страницы. По окончании ролика VK не отдаёт надёжного
+   события "ended" — поэтому не пытаемся авто-скрывать плеер обратно,
+   превью-фасад до клика уже решает основную проблему нежелательного
+   автовоспроизведения. ─────────────────────────────────────────── */
+const videoEmbed   = document.getElementById('video-embed');
+const videoPlayBtn = document.getElementById('video-play-btn');
+
+if (videoEmbed && videoPlayBtn) {
+  videoPlayBtn.addEventListener('click', function () {
+    const oid = videoEmbed.dataset.oid;
+    const vid = videoEmbed.dataset.vid;
+
+    const iframe = document.createElement('iframe');
+    iframe.src = `https://vk.com/video_ext.php?oid=${oid}&id=${vid}&hd=2&autoplay=1`;
+    iframe.setAttribute('allow', 'autoplay; fullscreen');
+    iframe.allowFullscreen = true;
+    iframe.title = 'Видеообзор дома — каркасный дом 80 м² в Красноярске';
+
+    videoEmbed.innerHTML = '';
+    videoEmbed.appendChild(iframe);
+  });
+}
+
 /* ── Карта: активация по клику (не перехватывает скролл) ─── */
 const mapOverlay = document.getElementById('map-overlay');
 if (mapOverlay) {
