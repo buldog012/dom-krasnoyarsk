@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Три варианта первого экрана</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../v2/style.css">
+  <style>
+    /* Разделители между вариантами */
+    .variant-label {
+      background: var(--ink); color: var(--on-dark); padding: 14px var(--gutter);
+      font-size: .8rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+    }
+    .variant-label span { color: var(--accent-light); margin-right: 12px; }
+    .hero { min-height: 100vh; }
+    .hero__inner > * { animation: none; }
+
+    /* Вариант Б: разворот, текст на бумаге слева, фото справа */
+    .hero--split { background: var(--paper); color: var(--ink); align-items: stretch; display: grid; grid-template-columns: 1fr 1.1fr; }
+    .hero--split::after { display: none; }
+    .hero--split .hero__img { position: relative; z-index: 0; height: 100%; min-height: 100vh; grid-column: 2; }
+    .hero--split .hero__inner { grid-column: 1; grid-row: 1; padding: 150px clamp(24px, 5vw, 80px) 64px; max-width: none; margin: 0; }
+    .hero--split .hero__lead { color: var(--muted); }
+    .hero--split .fact__label { color: var(--muted); }
+    .hero--split .hero__facts { border-top-color: var(--line); grid-template-columns: repeat(2, 1fr); }
+    .hero--split .eyebrow { color: var(--accent); }
+    .hero--split .hero__title em { color: var(--accent-h); }
+
+    /* Вариант В: центр, одна кнопка, факты карточкой внизу */
+    .hero--center { align-items: center; text-align: center; }
+    .hero--center::after { background: linear-gradient(to top, rgba(23, 25, 29, .8) 0%, rgba(23, 25, 29, .45) 50%, rgba(23, 25, 29, .4) 100%); }
+    .hero--center .hero__inner { padding: 140px 0 40px; display: flex; flex-direction: column; align-items: center; }
+    .hero--center .hero__title { max-width: 18ch; }
+    .hero--center .hero__actions { justify-content: center; }
+    .hero--center .hero__facts {
+      margin-top: 72px; border: 1px solid var(--line-dark); border-radius: var(--r-card); padding: 26px 32px;
+      background: rgba(23, 25, 29, .35); backdrop-filter: blur(10px); width: min(100%, 880px);
+    }
+    @media (max-width: 900px) {
+      .hero--split { grid-template-columns: 1fr; }
+      .hero--split .hero__img { grid-column: 1; grid-row: 2; min-height: 60vh; }
+      .hero--split .hero__inner { grid-row: 1; padding-top: 110px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="variant-label"><span>Вариант А</span> Фото на весь экран, текст внизу слева, факты полосой. Взят в v2.</div>
+  <section class="hero">
+    <img class="hero__img" src="../../v2/img/hero-1400.jpg" alt="">
+    <div class="container hero__inner">
+      <p class="eyebrow">Готовый дом · с. Зыково, Берёзовский район</p>
+      <h1 class="hero__title">Дом уже построен. <em>Приезжайте</em> и посмотрите.</h1>
+      <p class="hero__lead">Каркасный дом 80&nbsp;м² с крытой террасой на участке 10&nbsp;соток, готов под чистовую отделку. Подходит под семейную ипотеку.</p>
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="#">Записаться на просмотр</a>
+        <a class="btn btn--outline" href="#">Видеообзор</a>
+      </div>
+      <dl class="hero__facts">
+        <div class="fact"><dd class="fact__value">80&nbsp;м²</dd><dt class="fact__label">Площадь дома</dt></div>
+        <div class="fact"><dd class="fact__value">2</dd><dt class="fact__label">Спальни</dt></div>
+        <div class="fact"><dd class="fact__value">10&nbsp;соток</dd><dt class="fact__label">Участок</dt></div>
+        <div class="fact"><dd class="fact__value">5,9&nbsp;млн&nbsp;₽</dd><dt class="fact__label">Цена с участком</dt></div>
+      </dl>
+    </div>
+  </section>
+
+  <div class="variant-label"><span>Вариант Б</span> Разворот: текст на бумаге слева, фото справа во всю высоту.</div>
+  <section class="hero hero--split">
+    <div class="hero__inner">
+      <p class="eyebrow">Готовый дом · с. Зыково, Берёзовский район</p>
+      <h1 class="hero__title">Дом уже построен. <em>Приезжайте</em> и посмотрите.</h1>
+      <p class="hero__lead">Каркасный дом 80&nbsp;м² с крытой террасой на участке 10&nbsp;соток, готов под чистовую отделку. Подходит под семейную ипотеку.</p>
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="#">Записаться на просмотр</a>
+        <a class="btn btn--outline" href="#">Видеообзор</a>
+      </div>
+      <dl class="hero__facts">
+        <div class="fact"><dd class="fact__value">80&nbsp;м²</dd><dt class="fact__label">Площадь дома</dt></div>
+        <div class="fact"><dd class="fact__value">2</dd><dt class="fact__label">Спальни</dt></div>
+        <div class="fact"><dd class="fact__value">10&nbsp;соток</dd><dt class="fact__label">Участок</dt></div>
+        <div class="fact"><dd class="fact__value">5,9&nbsp;млн&nbsp;₽</dd><dt class="fact__label">Цена с участком</dt></div>
+      </dl>
+    </div>
+    <img class="hero__img" src="../../v2/img/front-1920.jpg" alt="">
+  </section>
+
+  <div class="variant-label"><span>Вариант В</span> Центр: фото на весь экран, текст по центру, факты карточкой внизу.</div>
+  <section class="hero hero--center">
+    <img class="hero__img" src="../../v2/img/facade-1920.jpg" alt="">
+    <div class="container hero__inner">
+      <p class="eyebrow">Готовый дом · с. Зыково, Берёзовский район</p>
+      <h1 class="hero__title">Дом уже построен. <em>Приезжайте</em> и посмотрите.</h1>
+      <p class="hero__lead">Каркасный дом 80&nbsp;м² с крытой террасой на участке 10&nbsp;соток, готов под чистовую отделку. Подходит под семейную ипотеку.</p>
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="#">Записаться на просмотр</a>
+      </div>
+      <dl class="hero__facts">
+        <div class="fact"><dd class="fact__value">80&nbsp;м²</dd><dt class="fact__label">Площадь дома</dt></div>
+        <div class="fact"><dd class="fact__value">2</dd><dt class="fact__label">Спальни</dt></div>
+        <div class="fact"><dd class="fact__value">10&nbsp;соток</dd><dt class="fact__label">Участок</dt></div>
+        <div class="fact"><dd class="fact__value">5,9&nbsp;млн&nbsp;₽</dd><dt class="fact__label">Цена с участком</dt></div>
+      </dl>
+    </div>
+  </section>
+
+</body>
+</html>
