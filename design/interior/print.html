@@ -33,6 +33,9 @@
   .body.grid4 { min-height: 0; }
   .mini { display: grid; grid-template-rows: auto auto auto; gap: 1.5mm; border: 0.2mm solid #999; padding: 3mm; min-height: 0; overflow: hidden; }
   .mini svg { width: auto !important; height: 94mm !important; margin: 0 auto; }
+  .page--simple { grid-template-rows: auto 1fr 0; }
+  .mini--simple { grid-template-rows: auto 1fr; }
+  .mini--simple svg { height: 104mm !important; }
   .mini h3 { margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 600; font-size: 13pt; }
   .mini h3 em { font-style: normal; color: #A8651F; margin-right: 2mm; }
   .mini p { margin: 0; font-size: 8pt; color: #444; }
@@ -274,10 +277,18 @@
       '<div class="note"><h2>Мебель, см</h2>' + fl + '</div>' +
       '<div class="note"><p>Проверено: проходы 0,9 м и больше, у кровати 0,7 м и больше, перед кухней 1,0 м и больше.</p></div></div></div>' + foot(i + 2, TOTAL, 'лист ' + (i + 2) + ' · схема ' + l.id) + '</section>';
   });
-  /* Лист 6: сравнение */
-  html += '<section class="page"><div class="head"><h1><em>6</em>Четыре схемы рядом</h1><div class="facts">' + facts + '</div></div><div class="body grid4">' +
-    LAYOUTS.map(l => { const furn = furnFor(l); const fp = ROOM4.reduce((a, [id]) => a + footprint(furn, id), 0); return '<div class="mini"><h3><em>' + l.id + '</em>' + l.name + '</h3>' + SVG_MINI(planMarkup({ layout: l, zones: true, compact: true })) + '<p>Зоны кухни-зала: ' + l.zones.map(z => z.n.toLowerCase() + ' ' + fmt(z.a)).join(', ') + ' м². Под мебелью в четырёх комнатах ' + fmt(fp) + ' м², свободный пол ' + Math.round((1 - fp / 76.3) * 100) + ' %.</p></div>'; }).join('') +
-    '</div>' + foot(6, TOTAL, 'лист 6 · сравнение схем, масштаб 1:100') + '</section>';
+  /* Лист 6: сравнение. В режиме ?only=schemes только этот лист, без цифр в шапке и подписях */
+  function comparisonPage(simple) {
+    const minis = LAYOUTS.map(l => {
+      const furn = furnFor(l); const fp = ROOM4.reduce((a, [id]) => a + footprint(furn, id), 0);
+      const cap = simple ? '' : '<p>Зоны кухни-зала: ' + l.zones.map(z => z.n.toLowerCase() + ' ' + fmt(z.a)).join(', ') + ' м². Под мебелью в четырёх комнатах ' + fmt(fp) + ' м², свободный пол ' + Math.round((1 - fp / 76.3) * 100) + ' %.</p>';
+      return '<div class="mini' + (simple ? ' mini--simple' : '') + '"><h3><em>' + l.id + '</em>' + l.name + '</h3>' + SVG_MINI(planMarkup({ layout: l, zones: true, compact: true })) + cap + '</div>';
+    }).join('');
+    if (simple) return '<section class="page page--simple"><div class="head"><h1>Четыре схемы расстановки</h1><div class="facts">Дом в Зыково · масштаб 1:100 на A3</div></div><div class="body grid4">' + minis + '</div><div></div></section>';
+    return '<section class="page"><div class="head"><h1><em>6</em>Четыре схемы рядом</h1><div class="facts">' + facts + '</div></div><div class="body grid4">' + minis + '</div>' + foot(6, TOTAL, 'лист 6 · сравнение схем, масштаб 1:100') + '</section>';
+  }
+  const ONLY = new URLSearchParams(location.search).get('only');
+  if (ONLY === 'schemes') html = comparisonPage(true); else html += comparisonPage(false);
   document.getElementById('pages').innerHTML = html;
 })();
 </script>
