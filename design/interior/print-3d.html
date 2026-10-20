@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Дом в Зыково, альбом 3D-визуализации</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  @page { size: A3 landscape; margin: 10mm; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #fff; color: #17191D; font-family: 'Manrope', Arial, sans-serif; font-size: 9pt; line-height: 1.35; }
+  .page { width: 400mm; height: 276mm; page-break-after: always; display: flex; flex-direction: column; gap: 3mm; overflow: hidden; }
+  .page:last-child { page-break-after: auto; }
+  .head { display: flex; align-items: baseline; justify-content: space-between; border-bottom: 0.35mm solid #17191D; padding-bottom: 1.6mm; }
+  .head h1 { margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 600; font-size: 19pt; line-height: 1.1; }
+  .head h1 em { font-style: normal; color: #A8651F; margin-right: 3mm; }
+  .head span { font-size: 8.5pt; color: #555; }
+  figure { margin: 0; display: flex; flex-direction: column; gap: 1mm; min-width: 0; }
+  figure img { width: 100%; display: block; object-fit: cover; background: #ECE9E3; }
+  figure figcaption { font-size: 8pt; color: #333; }
+  figure figcaption b { font-weight: 700; color: #17191D; }
+  .row { display: flex; gap: 4mm; }
+  .main .axo img { height: 146mm; }
+  .main .plan img { height: 146mm; object-fit: contain; }
+  .main .axo { flex: 1.15; }
+  .main .plan { flex: 1; }
+  .ints { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4mm; }
+  .ints img { height: 86mm; }
+  .g3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3.5mm 4mm; }
+  .g3 img { height: 75mm; }
+  .g3 .plan img { object-fit: contain; }
+  .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+  .g2 img { height: 114mm; }
+  .note { font-size: 8pt; color: #444; margin-top: auto; border-top: 0.2mm solid #999; padding-top: 1.4mm; display: flex; justify-content: space-between; gap: 6mm; }
+</style>
+</head>
+<body>
+<div id="pages"></div>
+<script>
+(function () {
+  const STYLES = [
+    ['nord', 'Скандинавский', 'Северный свет'], ['japandi', 'Джапанди', 'Тёплый минимализм'], ['graphite', 'Графит и дерево', 'Современный контраст'],
+    ['greige', 'Современная классика', 'Мягкий греж'], ['baroque', 'Барокко', 'Современное барокко'], ['loft', 'Лофт', 'Индустриальный'], ['midcentury', 'Мид-сенчури', 'Середина века']
+  ];
+  const LAYOUTS = [['a', 'А', 'Классика у торца'], ['b', 'Б', 'Остров и бар'], ['v', 'В', 'Гостиная у окна'], ['g', 'Г', 'Большая столовая']];
+  const src = (l, s, v) => 'blender/renders/' + l + '-' + s + '-' + v + '.jpg';
+  const fig = (cls, l, s, v, cap) => '<figure class="' + cls + '"><img src="' + src(l, s, v) + '" alt=""><figcaption>' + cap + '</figcaption></figure>';
+  const foot = (n, total) => '<div class="note"><span>Дом в Зыково, ул. Свободы, 43. 3D-визуализация в Blender по размерам технического паспорта. Мебель условная, в реальных размерах. Не фотографии дома.</span><span>Лист ' + n + ' из ' + total + '</span></div>';
+  const total = 1 + STYLES.length + 3;
+  let html = '', n = 1;
+  // Лист 1: четыре схемы в одном стиле
+  html += '<section class="page"><div class="head"><h1>Четыре схемы расстановки</h1><span>стиль «Северный свет» · дом без крыши</span></div><div class="g2">' +
+    LAYOUTS.map(L => fig('', L[0], 'nord', 'axo', '<b>Схема ' + L[1] + '</b> · ' + L[2])).join('') + '</div>' + foot(n++, total) + '</section>';
+  // Листы 2–8: схема А в каждом стиле
+  STYLES.forEach(S => {
+    html += '<section class="page"><div class="head"><h1><em>' + S[1] + '</em>' + S[2] + '</h1><span>схема А «Классика у торца»</span></div>' +
+      '<div class="row main">' + fig('axo', 'a', S[0], 'axo', '<b>Дом без крыши</b>') + fig('plan', 'a', S[0], 'plan', '<b>План сверху</b>') + '</div>' +
+      '<div class="ints">' + fig('', 'a', S[0], 'kh', '<b>Кухня-зал</b>, 29,1 м²') + fig('', 'a', S[0], 'kitchen', '<b>Кухня</b>') + fig('', 'a', S[0], 'bed3', '<b>Спальня</b>, 14,1 м²') + fig('', 'a', S[0], 'terrace', '<b>Терраса</b>, 19,0 м²') + '</div>' +
+      foot(n++, total) + '</section>';
+  });
+  // Листы 9–11: схемы Б, В, Г во всех стилях
+  LAYOUTS.slice(1).forEach(L => {
+    html += '<section class="page"><div class="head"><h1><em>' + L[1] + '</em>' + L[2] + '</h1><span>схема ' + L[1] + ' в семи стилях</span></div><div class="g3">' +
+      fig('plan', L[0], 'nord', 'plan', '<b>План сверху</b> · Скандинавский') + fig('', L[0], 'nord', 'kh', '<b>Кухня-зал</b> · Скандинавский') +
+      STYLES.map(S => fig('', L[0], S[0], 'axo', '<b>' + S[1] + '</b> · дом без крыши')).join('') + '</div>' + foot(n++, total) + '</section>';
+  });
+  document.getElementById('pages').innerHTML = html;
+})();
+</script>
+</body>
+</html>

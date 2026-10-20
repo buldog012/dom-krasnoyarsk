@@ -22,3 +22,6 @@ desktop.ini
 *.mkv
 *.webm
 *.wmv
+
+# журнал пакетного рендера Blender
+design/interior/blender/render.log

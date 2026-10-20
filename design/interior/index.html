@@ -147,6 +147,21 @@
   .viz figcaption b { color: var(--ink); font-weight: 700; }
   .viz__missing { aspect-ratio: 3 / 1; display: grid; place-items: center; color: var(--muted); font-size: .9rem; background: var(--paper-2); }
   #viz-out { display: none; position: fixed; left: 0; top: 0; z-index: 999; }
+  .bl-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .bl-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .bl-shot { background: var(--white); border: 1px solid var(--line); border-radius: var(--r-card); overflow: hidden; margin: 0; cursor: zoom-in; }
+  .bl-shot img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; background: var(--paper-2); display: block; }
+  .bl-pair .bl-shot img { aspect-ratio: 4 / 3; object-fit: contain; background: #ECE9E3; }
+  .bl-shot figcaption { padding: 9px 13px 11px; font-size: .86rem; }
+  .bl-shot figcaption b { display: block; font-family: var(--font-display); font-size: 1.12rem; font-weight: 600; }
+  .bl-shot figcaption span { color: var(--muted); }
+  .bl-missing { aspect-ratio: 3 / 2; display: grid; place-items: center; padding: 16px; text-align: center; color: var(--muted); font-size: .88rem; background: var(--paper-2); }
+  .bl-strip button img { aspect-ratio: 3 / 2; }
+  .zoom { position: fixed; inset: 0; z-index: 80; background: rgba(23,25,29,.92); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 56px 16px 24px; gap: 10px; }
+  .zoom[hidden] { display: none; }
+  .zoom img { max-width: 100%; max-height: calc(100vh - 120px); object-fit: contain; border-radius: 6px; }
+  .zoom p { color: var(--on-dark-muted); font-size: .9rem; margin: 0; text-align: center; }
+  .zoom__close { position: absolute; top: 14px; right: 16px; width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,.12); color: #fff; font-size: 1.1rem; }
   .renders { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
   .render { background: var(--white); border: 1px solid var(--line); border-radius: var(--r-card); overflow: hidden; }
   .render img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; background: var(--paper-2); }
@@ -202,6 +217,8 @@
     .palette { margin-left: 0; }
     .layout-desc { grid-template-columns: 1fr 1fr; }
     .schemes { grid-template-columns: 1fr; }
+    .bl-pair { grid-template-columns: 1fr; }
+    .bl-grid { grid-template-columns: 1fr 1fr; }
     .renders { grid-template-columns: 1fr 1fr; }
     .strip { grid-template-columns: repeat(4, 1fr); }
   }
@@ -211,6 +228,7 @@
     .stage { aspect-ratio: 4 / 3; }
     .pad { right: 10px; bottom: 10px; }
     .layout-desc { grid-template-columns: 1fr; }
+    .bl-grid { grid-template-columns: 1fr; }
     .renders { grid-template-columns: 1fr; }
     .strip { grid-template-columns: repeat(3, 1fr); }
     .stylebar__label { min-width: 0; }
@@ -222,7 +240,7 @@
     <div>
       <p class="eyebrow">Дом в Зыково · интерьер</p>
       <h1>Дом 80 м²: планировка по техпаспорту, четыре схемы расстановки и семь характеров</h1>
-      <p class="lead">Размеры комнат из плана этажа в техническом паспорте. Четыре схемы расстановки мебели с площадями зон, семь стилей по две палитры, 3D-прогулка и картинки по каждому стилю. Мебель, отделка и высота потолка эскизные.</p>
+      <p class="lead">Размеры комнат из плана этажа в техническом паспорте. Четыре схемы расстановки мебели с площадями зон, семь стилей по две палитры, 3D-визуализация в Blender для каждой схемы и стиля, 3D-прогулка. Мебель, отделка и высота потолка эскизные.</p>
       <span class="stamp">По техпаспорту · мебель эскизная</span>
     </div>
     <dl class="top__facts">
@@ -329,6 +347,27 @@
     </div>
   </div>
 </section>
+
+<section class="block" id="blender">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <p class="eyebrow">3D-визуализация в Blender</p>
+        <h2 id="bl-title">Схема и стиль</h2>
+      </div>
+      <p class="lead">Дом собран в Blender по тем же размерам техпаспорта и той же расстановке, что на плане выше. Свет считается физически: солнце и небо через окна. Выберите схему и стиль в панели сверху, картинки сменятся. Нажмите на картинку, чтобы рассмотреть её крупно.</p>
+    </div>
+    <div class="bl-pair" id="bl-pair"></div>
+    <h3 style="margin: 26px 0 10px;" id="bl-int-title">Интерьеры</h3>
+    <div class="bl-grid" id="bl-grid"></div>
+    <p class="note" id="bl-int-note" style="margin-top: 10px;"></p>
+    <h3 style="margin: 26px 0 10px;">Эта схема во всех стилях</h3>
+    <div class="strip bl-strip" id="bl-strip"></div>
+    <div class="ai-note">Это 3D-визуализация, а не фотографии дома. Размеры комнат, окна и двери точные, мебель условная, в реальных размерах. Для сайта и объявлений подойдёт только с подписью «визуализация».</div>
+  </div>
+</section>
+
+<div class="zoom" id="zoom" hidden><button class="zoom__close" id="zoom-close" type="button" aria-label="Закрыть">✕</button><img id="zoom-img" alt=""><p id="zoom-cap"></p></div>
 
 <section class="block" id="gallery">
   <div class="wrap">
@@ -731,13 +770,13 @@
   });
   function applyLayout() {
     FURN = furnFor(curLayout());
-    renderBar(); renderPlan(); selectRoom(state.room); renderPrompt(); renderLayoutViz();
+    renderBar(); renderPlan(); selectRoom(state.room); renderPrompt(); renderLayoutViz(); renderBlender();
     if (three) three.rebuild();
   }
   function applyStyle() {
     const v = cur();
     ROLES.forEach(r => document.documentElement.style.setProperty('--s-' + r, v[r]));
-    renderBar(); renderSpec(); renderPrompt(); renderGallery();
+    renderBar(); renderSpec(); renderPrompt(); renderGallery(); renderBlender();
     if (three) three.applyStyle();
   }
 
@@ -902,6 +941,32 @@
   }
 
   /* ---------- Галерея ИИ-картинок ---------- */
+  /* ---------- Рендеры Blender ---------- */
+  const BL_LAT = { 'А': 'a', 'Б': 'b', 'В': 'v', 'Г': 'g' };
+  const BL_VIEWS = [['kh', 'Кухня-зал'], ['kitchen', 'Кухня'], ['bed3', 'Спальня'], ['terrace', 'Терраса']];
+  const blMissing = 'onerror="this.replaceWith(Object.assign(document.createElement(\'div\'), {className: \'bl-missing\', textContent: \'Кадр ещё рендерится\'}))"';
+  const blSrc = (lid, sid, view) => 'blender/renders/' + lid + '-' + sid + '-' + view + '.jpg';
+  const blShot = (src, title, sub) => '<figure class="bl-shot" data-zoom="' + src + '" data-cap="' + title + ' · ' + sub + '"><img src="' + src + '" alt="' + title + ', ' + sub + '" loading="lazy" ' + blMissing + '><figcaption><b>' + title + '</b><span>' + sub + '</span></figcaption></figure>';
+  function renderBlender() {
+    const l = curLayout(), st = curStyle(), lid = BL_LAT[l.id] || 'a';
+    const sub = 'схема ' + l.id + ' · ' + st.name;
+    document.getElementById('bl-title').textContent = 'Схема ' + l.id + ' «' + l.name + '» · ' + st.name;
+    document.getElementById('bl-pair').innerHTML = blShot(blSrc(lid, st.id, 'plan'), 'План сверху', sub) + blShot(blSrc(lid, st.id, 'axo'), 'Дом без крыши', sub);
+    const views = lid === 'a' ? BL_VIEWS : BL_VIEWS.slice(0, 1);
+    const grid = document.getElementById('bl-grid');
+    grid.style.gridTemplateColumns = lid === 'a' ? '' : '1fr';
+    grid.innerHTML = views.map(v => blShot(blSrc(lid, st.id, v[0]), v[1], sub)).join('');
+    document.getElementById('bl-int-note').textContent = lid === 'a' ? '' : 'Кухню, спальню и террасу во всех стилях смотрите в схеме А.';
+    document.getElementById('bl-strip').innerHTML = STYLES.map((s, i) => '<button type="button" data-style="' + i + '" class="' + (i === state.style ? 'is-on' : '') + '"><img src="' + blSrc(lid, s.id, 'axo') + '" alt="' + s.name + ', схема ' + l.id + '" loading="lazy" ' + blMissing.replace('bl-missing', 'strip__missing').replace('Кадр ещё рендерится', 'рендерится') + '><span>' + s.renderTag + '</span></button>').join('');
+  }
+  const zoom = document.getElementById('zoom');
+  document.addEventListener('click', (e) => {
+    const z = e.target.closest('[data-zoom]');
+    if (z && z.querySelector('img')) { document.getElementById('zoom-img').src = z.dataset.zoom; document.getElementById('zoom-cap').textContent = z.dataset.cap; zoom.hidden = false; return; }
+    if (e.target === zoom || e.target.id === 'zoom-close') zoom.hidden = true;
+  });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') zoom.hidden = true; });
+
   const VIZ_LAYOUT_FILES = ['layout-a', 'layout-b', 'layout-c', 'layout-d'];
   const missing = (cls, text) => 'onerror="this.replaceWith(Object.assign(document.createElement(\'div\'), {className: \'' + cls + '\', textContent: \'' + text + '\'}))"';
   function renderLayoutViz() {
