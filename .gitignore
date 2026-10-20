@@ -25,3 +25,5 @@ desktop.ini
 
 # журнал пакетного рендера Blender
 design/interior/blender/render.log
+# альбом 3D собирается из renders командой в design/interior/README.md
+design/interior/album-3d.pdf
