@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Интерьеры дома в Зыково для покупателя</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  @page { size: 1600px 1200px; margin: 0; }
+  @media print { .slide { height: 1198px; } }
+  * { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  html, body { margin: 0; background: #F6F2EC; color: #17191D; font-family: 'Manrope', Arial, sans-serif; font-size: 22px; line-height: 1.4; -webkit-font-smoothing: antialiased; }
+  .slide { width: 1600px; height: 1200px; position: relative; overflow: hidden; background: #F6F2EC; padding: 56px 64px 0; display: flex; flex-direction: column; page-break-after: always; break-after: page; }
+  .slide:last-child { page-break-after: auto; }
+  .eyebrow { font-size: 17px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: #C47A2C; display: flex; align-items: center; gap: 14px; }
+  .eyebrow::before { content: ''; width: 32px; height: 2px; background: currentColor; }
+  h1 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: 72px; line-height: 1.02; margin: 14px 0 0; letter-spacing: -.01em; }
+  h1 em { font-style: italic; color: #A8651F; }
+  h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: 56px; line-height: 1.05; margin: 12px 0 0; }
+  .lead { font-size: 25px; color: #4A4D53; max-width: 60ch; margin: 18px 0 0; }
+  .foot { position: absolute; left: 64px; right: 64px; bottom: 34px; display: flex; justify-content: space-between; gap: 40px; font-size: 16px; color: #6E7178; border-top: 1px solid #E1DACF; padding-top: 14px; }
+  .foot b { color: #17191D; font-weight: 600; }
+  figure { margin: 0; position: relative; overflow: hidden; border-radius: 14px; background: #ECE9E3; }
+  figure img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  figure figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 14px 20px 16px; background: linear-gradient(to top, rgba(23,25,29,.72), rgba(23,25,29,0)); color: #fff; font-size: 20px; line-height: 1.3; }
+  figure figcaption b { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 30px; font-weight: 600; display: block; }
+  figure figcaption em { font-style: normal; color: #E8C08C; margin-right: 10px; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; flex: 1; margin-top: 26px; min-height: 0; margin-bottom: 86px; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; flex: 1; margin-top: 26px; min-height: 0; margin-bottom: 86px; }
+  /* обложка */
+  .cover { display: grid; grid-template-columns: 1.05fr 1fr; gap: 40px; flex: 1; margin-top: 30px; margin-bottom: 86px; min-height: 0; }
+  .cover figure { height: 100%; }
+  .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 40px; margin-top: 44px; }
+  .facts div { border-top: 2px solid #17191D; padding-top: 10px; }
+  .facts dd { margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 58px; font-weight: 500; line-height: 1; white-space: nowrap; }
+  .facts dt { font-size: 17px; letter-spacing: .14em; text-transform: uppercase; color: #6E7178; font-weight: 600; margin-top: 8px; }
+  /* планировка */
+  .plan { display: grid; grid-template-columns: 1.3fr .7fr; gap: 36px; flex: 1; margin-top: 26px; margin-bottom: 86px; min-height: 0; }
+  .plan figure { height: 100%; }
+  .plan figure img { object-fit: contain; background: #E9E5DE; }
+  .rooms { list-style: none; margin: 0; padding: 0; font-size: 23px; }
+  .rooms li { display: flex; justify-content: space-between; gap: 20px; padding: 13px 0; border-bottom: 1px solid #E1DACF; }
+  .rooms li span { color: #6E7178; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .rooms li.sum { font-weight: 700; border-bottom: 0; }
+  .rooms li.sum span { color: #17191D; }
+  .note { font-size: 19px; color: #6E7178; margin-top: 22px; }
+  /* контакты */
+  .contact { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; flex: 1; margin-top: 30px; margin-bottom: 86px; min-height: 0; }
+  .contact figure { height: 100%; }
+  .contact .big { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 50px; font-weight: 600; line-height: 1.15; margin-top: 36px; }
+  .contact .big small { display: block; font-family: 'Manrope', Arial, sans-serif; font-size: 20px; font-weight: 500; color: #6E7178; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 8px; }
+  .pill { display: inline-block; margin-top: 30px; border: 2px solid #A8651F; color: #A8651F; padding: 10px 18px; border-radius: 6px; font-size: 17px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+</style>
+</head>
+<body>
+
+<section class="slide">
+  <p class="eyebrow">Дом в Зыково · интерьеры</p>
+  <h1>Как может выглядеть <em>ваш</em> дом внутри</h1>
+  <div class="cover">
+    <div>
+      <p class="lead">Готовый дом 80 м² под чистовую отделку. Мы собрали дом в 3D по его точным размерам и показали четыре варианта расстановки мебели и семь стилей отделки, чтобы вы увидели, каким он может стать.</p>
+      <dl class="facts">
+        <div><dd>80 м²</dd><dt>дом</dt></div>
+        <div><dd>2 спальни</dd><dt>по 14 м²</dt></div>
+        <div><dd>29 м²</dd><dt>кухня-гостиная</dt></div>
+        <div><dd>19 м²</dd><dt>крытая терраса</dt></div>
+      </dl>
+    </div>
+    <figure><img src="blender/renders/a-nord-axo.jpg" alt=""><figcaption><b>Дом без крыши</b>схема А, скандинавский стиль</figcaption></figure>
+  </div>
+  <div class="foot"><span><b>Все изображения в презентации сделаны в 3D</b>, это не фотографии дома. Размеры комнат, окна и двери точные, по техпаспорту. Мебель условная.</span><span>1 / 7</span></div>
+</section>
+
+<section class="slide">
+  <p class="eyebrow">Планировка</p>
+  <h2>Две спальни, кухня-гостиная на всю глубину дома, терраса</h2>
+  <div class="plan">
+    <figure><img src="blender/renders/a-nord-plan.jpg" alt=""><figcaption><b>План с мебелью</b>схема А, вид сверху</figcaption></figure>
+    <div>
+      <ul class="rooms">
+        <li>Кухня-гостиная<span>29,1 м²</span></li>
+        <li>Спальня<span>14,1 м²</span></li>
+        <li>Спальня<span>14,1 м²</span></li>
+        <li>Коридор<span>6,8 м²</span></li>
+        <li>Санузел<span>3,8 м²</span></li>
+        <li>Прихожая<span>3,0 м²</span></li>
+        <li class="sum">Крытая терраса<span>19,0 м²</span></li>
+      </ul>
+      <p class="note">Выход на террасу из кухни-гостиной через остекление до пола. Окна в обеих спальнях и на кухне. Вход с крыльца через прихожую.</p>
+    </div>
+  </div>
+  <div class="foot"><span>Площади помещений по техническому паспорту дома.</span><span>2 / 7</span></div>
+</section>
+
+<section class="slide">
+  <p class="eyebrow">Расстановка мебели</p>
+  <h2>Четыре схемы: выбирайте, как жить в этом доме</h2>
+  <div class="grid2">
+    <figure><img src="blender/renders/a-nord-axo.jpg" alt=""><figcaption><b><em>А</em>Классика у торца</b>Кухня у торцевой стены, стол у выхода на террасу, диван напротив телевизора</figcaption></figure>
+    <figure><img src="blender/renders/b-nord-axo.jpg" alt=""><figcaption><b><em>Б</em>Остров и бар</b>Кухня с островом и барной стойкой, стол ближе к остеклению, детская на двоих</figcaption></figure>
+    <figure><img src="blender/renders/v-nord-axo.jpg" alt=""><figcaption><b><em>В</em>Гостиная у окна</b>Кухня буквой П, стол в центре, диван у остекления, вторая спальня как кабинет</figcaption></figure>
+    <figure><img src="blender/renders/g-nord-axo.jpg" alt=""><figcaption><b><em>Г</em>Большая столовая</b>Стол на шестерых у окна, угловой диван, во второй спальне место для детской кроватки</figcaption></figure>
+  </div>
+  <div class="foot"><span>Стены и окна во всех схемах одни. Мебель показана в реальных размерах.</span><span>3 / 7</span></div>
+</section>
+
+<section class="slide">
+  <p class="eyebrow">Стили отделки · 1 из 2</p>
+  <h2>Кухня-гостиная в четырёх характерах</h2>
+  <div class="grid2">
+    <figure><img src="blender/renders/a-nord-kh.jpg" alt=""><figcaption><b>Скандинавский</b>Белые стены, светлый дуб, много света. Самый простой в исполнении</figcaption></figure>
+    <figure><img src="blender/renders/a-japandi-kh.jpg" alt=""><figcaption><b>Тёплый минимализм</b>Бежевые стены, орех, лён и керамика. Спокойно и уютно</figcaption></figure>
+    <figure><img src="blender/renders/a-graphite-kh.jpg" alt=""><figcaption><b>Графит и дерево</b>Тёмная кухня и акцентная стена, тёплый дуб, латунь. Продолжение фасада внутри</figcaption></figure>
+    <figure><img src="blender/renders/a-greige-kh.jpg" alt=""><figcaption><b>Современная классика</b>Серо-бежевые стены, молочная кухня, лёгкие молдинги</figcaption></figure>
+  </div>
+  <div class="foot"><span>Одна и та же расстановка А, меняется только отделка и мебель.</span><span>4 / 7</span></div>
+</section>
+
+<section class="slide">
+  <p class="eyebrow">Стили отделки · 2 из 2</p>
+  <h2>Ещё три стиля и крытая терраса</h2>
+  <div class="grid2">
+    <figure><img src="blender/renders/a-baroque-kh.jpg" alt=""><figcaption><b>Барокко</b>Кремовые стены с золотом, бархат, люстра над столом</figcaption></figure>
+    <figure><img src="blender/renders/a-loft-kh.jpg" alt=""><figcaption><b>Лофт</b>Кирпичная стена, бетонный пол, чёрный металл, кожаный диван</figcaption></figure>
+    <figure><img src="blender/renders/a-midcentury-kh.jpg" alt=""><figcaption><b>Мид-сенчури</b>Олива и горчица, тик, люстра-спутник. Живой и тёплый</figcaption></figure>
+    <figure><img src="blender/renders/a-nord-terrace.jpg" alt=""><figcaption><b>Крытая терраса 19 м²</b>Выход из кухни-гостиной, стол на четверых и уличный диван под крышей</figcaption></figure>
+  </div>
+  <div class="foot"><span>Любой стиль можно сделать в двух палитрах: светлее или темнее.</span><span>5 / 7</span></div>
+</section>
+
+<section class="slide">
+  <p class="eyebrow">Комнаты</p>
+  <h2>Спальня и кухня в разных стилях</h2>
+  <div class="grid3">
+    <figure><img src="blender/renders/a-nord-bed3.jpg" alt=""><figcaption><b>Спальня</b>скандинавский</figcaption></figure>
+    <figure><img src="blender/renders/a-greige-bed3.jpg" alt=""><figcaption><b>Спальня</b>современная классика</figcaption></figure>
+    <figure><img src="blender/renders/a-baroque-bed3.jpg" alt=""><figcaption><b>Спальня</b>барокко</figcaption></figure>
+    <figure><img src="blender/renders/a-japandi-kitchen.jpg" alt=""><figcaption><b>Кухня</b>тёплый минимализм</figcaption></figure>
+    <figure><img src="blender/renders/a-graphite-kitchen.jpg" alt=""><figcaption><b>Кухня</b>графит и дерево</figcaption></figure>
+    <figure><img src="blender/renders/a-loft-kitchen.jpg" alt=""><figcaption><b>Кухня</b>лофт</figcaption></figure>
+  </div>
+  <div class="foot"><span>Спальня 14,1 м²: кровать 160 см, две тумбы, шкаф 2 м. Кухня 3 м вдоль стены с окном над мойкой.</span><span>6 / 7</span></div>
+</section>
+
+<section class="slide">
+  <p class="eyebrow">Приезжайте посмотреть</p>
+  <h2>Дом уже стоит. Отделку выбираете вы</h2>
+  <div class="contact">
+    <div>
+      <p class="lead">Дом готов под чистовую отделку: электрика с розетками, тёплый пол, натяжные потолки, скважина и септик уже сделаны. Любая из схем и любой из стилей на этих картинках выполнимы в нём без перестройки стен.</p>
+      <p class="big"><small>Адрес дома</small>с. Зыково, ул. Свободы, 43<br>Берёзовский район, рядом с Красноярском</p>
+      <p class="big"><small>Телефон, WhatsApp, Telegram</small>+7 913 184-10-01</p>
+      <span class="pill">Подходит под семейную ипотеку</span>
+    </div>
+    <figure><img src="blender/renders/g-japandi-kh.jpg" alt=""><figcaption><b>Кухня-гостиная</b>схема Г, тёплый минимализм</figcaption></figure>
+  </div>
+  <div class="foot"><span>3D-визуализация по размерам техпаспорта. Мебель и отделка показаны как варианты, в цену дома не входят.</span><span>7 / 7</span></div>
+</section>
+
+</body>
+</html>
