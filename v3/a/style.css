@@ -298,6 +298,12 @@ button { font: inherit; color: inherit; }
 .footer__row { position: relative; }
 .footer__brand { display: flex; align-items: center; gap: 10px; }
 .footer__brand .brand__mark { width: 26px; height: 26px; }
-.bear { position: absolute; right: -30px; bottom: -14px; width: min(560px, 70vw); height: auto; fill: var(--bone); opacity: .07; pointer-events: none; }
-@media (max-width: 900px) { .section--taiga { background-size: cover; background-position: center; } .bear { width: 340px; right: -40px; } }
+@media (max-width: 900px) { .section--taiga { background-size: cover; background-position: center; } }
 @media (max-width: 1280px) { .section--taiga { background-image: url(../img/taiga-1100.jpg); } }
+
+/* Медведь: эскиз тушью на бумаге, стоит в лесу у формы */
+.section--light.has-sketch { padding-bottom: calc(clamp(72px, 9vw, 128px) + 300px); }
+.sketch { position: absolute; left: max(var(--gutter), calc((100% - var(--container)) / 2)); bottom: 48px; width: 460px; height: auto; opacity: .92; pointer-events: none; z-index: 1; }
+.section--light .form-grid { position: relative; z-index: 2; }
+@media (max-width: 1180px) { .sketch { width: 360px; bottom: 60px; } }
+@media (max-width: 900px) { .section--light.has-sketch { padding-bottom: 110px; } .sketch { position: static; display: block; width: min(380px, 78%); margin: 36px auto 0; } }
