@@ -28,3 +28,10 @@ design/interior/blender/render.log
 # альбом 3D собирается из renders командой в design/interior/README.md
 design/interior/album-3d.pdf
 design/interior/buyer/buyer.pdf
+
+# кэш Python
+__pycache__/
+
+# локальные настройки Claude Code
+.claude/settings.local.json
+.claude/launch.json

@@ -2006,4 +2006,5 @@ def main():
     render_views(house, a)
 
 
-main()
+if __name__ == '__main__':
+    main()
