@@ -19,6 +19,7 @@ JOBS = [
     (os.path.join(DRONE, 'DJI_20260702122642_0511_D.JPG'), 'ext-close', (1600, 800), 82),
     (os.path.join(DRONE, 'DJI_20260702123354_0520_D.JPG'), 'ext-top', (1600, 800), 82),
     (os.path.join(DRONE, 'DJI_20260702122952_0517_D.JPG'), 'ext-terrace-top', (1600, 800), 82),
+    (os.path.join(DRONE, 'DJI_20260702124537_0530_D.JPG'), 'taiga', (2200, 1100), 78),
     (os.path.join(CLEAN, 'living.jpg'), 'living', (1200, 600), 82),
     (os.path.join(CLEAN, 'bedroom.jpg'), 'bedroom', (1200, 600), 82),
     (os.path.join(INSIDE, 'IMG_20260702_115752.jpg'), 'room', (1200, 600), 82),
