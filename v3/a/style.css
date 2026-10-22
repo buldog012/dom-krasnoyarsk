@@ -302,5 +302,5 @@ button { font: inherit; color: inherit; }
 @media (max-width: 1280px) { .section--taiga { background-image: url(../img/taiga-1100.jpg); } }
 
 /* Медведь: силуэт в подвале, водяной знак */
-.bear { position: absolute; right: 7%; bottom: 0; height: 92%; width: auto; fill: var(--bone); opacity: .11; pointer-events: none; }
-@media (max-width: 900px) { .bear { right: 4%; height: 70%; } }
+.bear { position: absolute; right: 3%; bottom: 0; height: 86%; width: auto; fill: var(--bone); opacity: .13; pointer-events: none; }
+@media (max-width: 900px) { .bear { right: -12%; height: 42%; opacity: .1; } }
